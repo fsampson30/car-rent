@@ -4,6 +4,7 @@
  - **Java 21**;
  - **Spring Boot 3**;
  - **Spring Data JPA**;
+ - **PostgreSQL**;
  - **OpenAPI (Swagger)**;
  - **Railway**.
 
