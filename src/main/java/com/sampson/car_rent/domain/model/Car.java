@@ -3,6 +3,7 @@ package com.sampson.car_rent.domain.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "tb_car")
 public class Car {
 
     @Id
