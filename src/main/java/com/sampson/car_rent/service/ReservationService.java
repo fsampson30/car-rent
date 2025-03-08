@@ -15,5 +15,5 @@ public interface ReservationService {
 
     List<Reservation> getAllReservations();
 
-    Optional<Reservation> getReservationById(Long id);
+    Reservation getReservationById(Long id);
 }

@@ -29,7 +29,7 @@ public class ReservationController {
     @GetMapping("/{id}")
     @Operation(summary = "Get a reservation by ID", description = "Retrieve a reservation with the ID informed")
     public ResponseEntity<Reservation> findReservationById(@PathVariable Long id){
-        return ResponseEntity.ok(reservationService.getReservationById(id).get());
+        return ResponseEntity.ok(reservationService.getReservationById(id));
     }
 
     @PostMapping

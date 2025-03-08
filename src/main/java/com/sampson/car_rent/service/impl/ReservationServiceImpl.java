@@ -6,6 +6,7 @@ import com.sampson.car_rent.service.ReservationService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -24,12 +25,12 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public void deleteReservation(Long id) {
-        getReservationById(id).ifPresent(reservation -> reservationRepository.delete(reservation));
+        //getReservationById(id).ifPresent(reservation -> reservationRepository.delete(reservation));
     }
 
     @Override
     public Reservation updateReservation(Reservation reservationChanged) {
-        getReservationById(reservationChanged.getId()).ifPresent(reservation -> reservationRepository.save(reservation));
+        //getReservationById(reservationChanged.getId()).ifPresent(reservation -> reservationRepository.save(reservation));
         return null;
     }
 
@@ -39,8 +40,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Optional<Reservation> getReservationById(Long id) {
-        return reservationRepository.findById(id);
+    public Reservation getReservationById(Long id) {
+        return reservationRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
 
