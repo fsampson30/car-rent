@@ -11,7 +11,7 @@ public interface ReservationService {
 
     void deleteReservation(Long id);
 
-    Reservation updateReservation(Reservation reservation);
+    Reservation updateReservation(Long id, Reservation reservation);
 
     List<Reservation> getAllReservations();
 

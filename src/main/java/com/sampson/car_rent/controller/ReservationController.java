@@ -6,7 +6,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,7 +37,15 @@ public class ReservationController {
     @PostMapping
     @Operation(summary = "Create a new reservation", description = "Generate new a reservation")
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation){
-        return ResponseEntity.ok(reservationService.createReservation(reservation));
+        Reservation reservationCreated = reservationService.createReservation(reservation);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(reservationCreated.getId()).toUri();
+        return ResponseEntity.created(location).body(reservationCreated);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update a created reservation", description = "Update a reservation")
+    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservation){
+        return ResponseEntity.ok(reservationService.updateReservation(id,reservation));
     }
 
 

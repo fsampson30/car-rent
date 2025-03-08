@@ -29,9 +29,19 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Reservation updateReservation(Reservation reservationChanged) {
-        //getReservationById(reservationChanged.getId()).ifPresent(reservation -> reservationRepository.save(reservation));
-        return null;
+    public Reservation updateReservation(Long id, Reservation reservationChanged) {
+        var reservationFound = reservationRepository.findById(id);
+
+        if (reservationFound.isPresent()){
+            reservationFound.get().setInitialDate(reservationChanged.getInitialDate());
+            reservationFound.get().setFinalDate(reservationChanged.getFinalDate());
+            reservationFound.get().setInsurance(reservationChanged.isInsurance());
+            reservationFound.get().setClient(reservationChanged.getClient());
+            reservationFound.get().setCar(reservationChanged.getCar());
+        } else {
+            throw new NoSuchElementException();
+        }
+        return reservationRepository.save(reservationChanged);
     }
 
     @Override
