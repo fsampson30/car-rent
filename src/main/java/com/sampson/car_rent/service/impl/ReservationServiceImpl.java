@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -25,13 +24,13 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public void deleteReservation(Long id) {
-        //getReservationById(id).ifPresent(reservation -> reservationRepository.delete(reservation));
+        var reservationFound = reservationRepository.findById(id);
+        reservationFound.ifPresentOrElse( reservation -> reservationRepository.delete(reservation), NoSuchElementException::new);
     }
 
     @Override
     public Reservation updateReservation(Long id, Reservation reservationChanged) {
         var reservationFound = reservationRepository.findById(id);
-
         if (reservationFound.isPresent()){
             reservationFound.get().setInitialDate(reservationChanged.getInitialDate());
             reservationFound.get().setFinalDate(reservationChanged.getFinalDate());
