@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ReservationService {
 
-    void createReservation(Reservation reservation);
+    Reservation createReservation(Reservation reservation);
 
     void deleteReservation(Long id);
 

@@ -16,10 +16,10 @@ public class Reservation {
     LocalDateTime finalDate;
     boolean insurance;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Client client;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Car car;
 
     public Reservation() {
